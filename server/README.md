@@ -4,7 +4,7 @@ Leave environment variables for less complexity
 **Install dependences**
 `npm install`
 **Run**
-`npm run start`
+`npm run dev`
 
 **Please check the enviroment variables**
 
