@@ -1,31 +1,35 @@
-# devTest
-We want to understand better how good you are integrating several technologies to provide a solid solution, this is a sample project that will help ilustrate just that.
+<p align="center">
+  <a href="https://github.com/oliverdjbrown/" target="blank"><img src="https://sm-services.es/wp-content/uploads/2021/02/MEAN-Stack.jpg" width="200" alt="mean Logo" /></a>
+</p>
 
-**Exchange rate per symbol**
+# devTest - MeanStack
 
-We would like to generate a site that provides exchange information and general information of the sample platform selected to the end users.
+## Project Technologies Details
+1) Backend => NodeJs
+- ExpressJs
+- Ws (socket)
+- MongoDb
+- typescript
+- docker compose script
 
-1. Fork this project and invite me (starl1n), you are going to work on the branch you just created and submit your changes there.
-2. Create a connection to these endpoints using the required technology:
+2) Front => Angular
+- Rxjs
+- ng-bootstrap
+- bootstrap icons
 
-**Socket endpoint:** 
-wss://ws.bitmex.com/realtime?subscribe=instrument,orderBookL2_25:XBTUSD
+## Instructions
 
-For reference: https://www.bitmex.com/app/wsAPI
+1. Clone Project
 
-**WEB API:**
-https://www.bitmex.com/api/explorer/#!/Announcement/Announcement_get
+2. Install dependencies on both back and front projects by using command
+```
+npm install
+```
+3. On nodejs backend project copy and rename file from ```.env.template``` to ```.env```
 
-3. Present the data in a human readable fashion (ReactJS/Blazor/Etc)
-4. Store the records received from the connection into a database SQL Server/MariaDB/MongoDB/Postgres/
-5. In a separated section of the solution provide a way to search or filter for the results stored in the Database of choice sorted by date in decending order, maybe you can add any sort of filter here too.
+4. On nodejs backend project fill the environment variables
 
-
-**This test will evaluate:**
-1. Web Socket/API consumption capabilities
-2. Knowledge of API integration between databases/API
-3. Also will show capabilities of handling the frontend technologies
-4. Familiarity with the language
-
-
-If you are unfamiliar with any part of the request, is fine, you can skip it **(but make a comment )**
+5. On nodejs backend project to create the database run the command
+```
+docker-compose up -d
+```
