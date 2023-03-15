@@ -1,0 +1,86 @@
+<div class="row">
+
+  <div class="col-6">
+    <div class="dataTables_length" id="tickets-table_length">
+      <label class="d-inline-flex align-items-center"
+        >Show
+        <select
+          name="pageSize"
+          class="form-control form-control-sm mx-2"
+          [(ngModel)]="pageSize"
+        >
+          <option [ngValue]="10">10</option>
+          <option [ngValue]="25">25</option>
+          <option [ngValue]="50">50</option>
+          <option [ngValue]="100">100</option></select
+        >Transactions</label
+      >
+    </div>
+  </div>
+  <div class="col-6">
+    <div
+    id="tickets-table_filter"
+    class="dataTables_filter text-md-end"
+  >
+    <label class="d-inline-flex align-items-center"
+      >Search:
+      <input
+        type="text"
+        name="searchTerm"
+        class="form-control form-control-sm ml-2"
+        aria-controls="tickets-table"
+        [(ngModel)]="searchTerm"
+    /></label>
+  </div>
+  </div>
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Transaction</th>
+          <th scope="col">Table</th>
+          <th scope="col">Action</th>
+          <th scope="col">Operations</th>
+          <th scope="col">Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trans of transactions | slice: (page-1) * pageSize : page * pageSize | filter: searchTerm; index as i">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{trans._id}}</td>
+          <td>{{trans.table}}</td>
+          <td>{{trans.action}}</td>
+          <td>{{trans.data.length}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="openDetails(content, trans.data)">
+              <i class="bi bi-eye-fill" ></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <ngb-pagination
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="transactions.length">
+   </ngb-pagination>
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Operation Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        {{ operations | json }}
+      </div>
+    </form>
+  </div>
+</ng-template>
