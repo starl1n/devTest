@@ -14,6 +14,10 @@ const TransactionSchema = new Schema({
     type: Array,
     required: [true, 'Data is required'],
   },
+  timestamp: {
+    type: String,
+    required: [true, 'Timestamp is required'],
+  }
 });
 
 const TransactionModel = model('Transactions', TransactionSchema)

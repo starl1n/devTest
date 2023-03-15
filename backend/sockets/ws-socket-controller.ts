@@ -21,6 +21,7 @@ const socketController = (book: string, currency: string) => {
 const saveTransaction = async (transaction: Transaction) => {
   try {
     const data = new TransactionModel(transaction);
+    data.timestamp = data.data[0].timestamp || new Date().toISOString();
     await data.save();
     console.log(
       `operation saved ${transaction.action} table ${transaction.table} operations ${transaction.data.length}`

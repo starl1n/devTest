@@ -2,22 +2,25 @@ import { Request, Response } from 'express';
 import { TransactionModel } from '../models/transaction.model';
 
 const transactionGet = async (req: Request, res: Response) => {
-  const { limit = 20, skip = 0 } = req.query;  
+  const { limit = 20, skip = 0 } = req.query;
   const [total, transactions] = await Promise.all([
     TransactionModel.countDocuments(),
     TransactionModel.find()
       .skip(Number(skip))
-      .limit(Number(limit))      
+      .limit(Number(limit))
+      .sort({ timestamp: -1 }),
   ]);
-  res.status(200).json({ 
+  res.status(200).json({
     total,
-    transactions
-   });
+    transactions,
+  });
 };
 
 const transactionPost = async (req: Request, res: Response) => {
   const data = req.body;
+  data.timestamp = data.data[0].timestamp || new Date().toISOString();
   const transaction = new TransactionModel(data);
+  console.log(transaction);
   await transaction.save();
   res.status(201).json(transaction);
 };
@@ -28,9 +31,9 @@ const transactionPut = async (req: Request, res: Response) => {
 };
 
 const transactionDelete = async (req: Request, res: Response) => {
-  await TransactionModel.deleteMany();  
+  await TransactionModel.deleteMany();
   res.status(200).json({
-    message: 'table deleted'
+    message: 'table deleted',
   });
 };
 
