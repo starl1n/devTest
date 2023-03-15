@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { TransactionModel } from '../models/transaction.model';
 
 const transactionGet = async (req: Request, res: Response) => {
-  const { limit = 20, skip = 0 } = req.query;
+  const { limit = process.env.MAX_PAGINATION || 100, skip = 0 } = req.query;
   const [total, transactions] = await Promise.all([
     TransactionModel.countDocuments(),
     TransactionModel.find()
